@@ -17288,3 +17288,24 @@ IPython.notebook.save_checkpoint();
     </div>
   </div>
 </body>
+
+  <!-- Loads nbinteract package -->
+  <script src="https://unpkg.com/nbinteract-core" async></script>
+  <script>
+    (function setupNbinteract() {
+      // If NbInteract hasn't loaded, wait one second and try again
+      if (window.NbInteract === undefined) {
+        setTimeout(setupNbinteract, 1000)
+        return
+      }
+
+      var interact = new window.NbInteract({
+        spec: 'desktop/projects/Coastal Erosion Website',
+        baseUrl: 'https://mybinder.org',
+        provider: 'gh',
+      })
+      interact.prepare()
+
+      window.interact = interact
+    })()
+  </script>
