@@ -25,242 +25,145 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul class="links">
-							<li><a href="index.html">Our Project</a></li>
-							<li class="active"><a href="generic.html">Our Mission</a></li>
+							<li><a href="index.html">Our Mission</a></li>
+							<li class="active"><a href="generic.html">Our Project</a></li>
 							<li><a href="elements.html">References</a></li>
 						</ul>
 						<ul class="icons">
 							<li><a href="https://github.com/LouisianaCoastalRestoration/LouisianaCoastalRestoration.github.io" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
 						</ul>
 					</nav>
-
+				
 				<!-- Main -->
-					<div id="main">
+				<div id="main">
 
-						<!-- Post -->
-							<section class="post">
-								<header class="major">
-									<span class="date">Our Mission</span>
-									<h1>Confronting<br />
-										the Problem</h1>
-									<p>Our mission: Our project aims to optimize coastal tree placement to protect the eroding shoreline of 
-										Louisiana. After extensive research, it is clear that certain trees, such as cypress trees and mangrove
-										trees, act as natural barriers to block storm surge and flooding, which ultimately prevents shoreline
-										sediment from being washed out to sea. We hope to renovate the current approach to mitigating erosion
-										on the coastline by applying a systematic algorithm that maximizes each trees' potential.
-										Thus, our project proposes a novel advance to coastline preservation via the deliberate
-										and intelligent placement of trees in vulnerable areas.</p>
-								</header>
-								<div class="image main"><img src="images/ErosionGIF.gif" alt="" />
-								<caption>Land change in Barataria Bay from 1932 to 2016. <a href ='https://www.lacoast.gov/CRMS/#'>Source: CRMS.</a> </caption></div>
-							</section>
-						
+					<!-- Featured Post -->
+						<article class="post featured">
+							<header class="major">
+								<span class="date">The Algorithms</span>
+								<h2>Simulating Coastal<br />
+									and Wetland Erosion</h2>
+								<p> The land of southern Louisiana is eroding at a rate of a football field an hour. 
+									Thanks to increasingly frequent hurricanes and storm surges, this rate shows no signs of 
+									slowing down. Our project seeks to mitigate this damage as much as possible via the 
+									algorithmic placement of cypress trees in Louisianan wetlands. By prioritizing the 
+									placement of trees in water rather than on land, our algorithm most effectively protects 
+									exposed faces of land and consistently outperforms the human intuition in metrics of 
+									land mass retention, as well as adhering to geographic restrictions such as salinity and 
+									water depth.</p>
+								<!--<link href="erosion_model.html" rel="import" />-->
 
-					</div>
-
-
-					<div id="main">
-
-						<!-- Post -->
-							<section class="post">
-								<header class="major">
-									<span class="date">Background Information</span>
-									
-
-								<!-- Image Compairson Slider-->
-
-								<html>
-								<head>
-								<meta name="viewport" content="width=device-width, initial-scale=1.0">
-								<style>
-								* {box-sizing: border-box;}
-
-								.img-comp-container {
-								position: relative;
-								height: 600px; /*should be the same height as the images*/
-								}
-
-								.img-comp-img {
-								position: absolute;
-								width: auto;
-								height: auto;
-								overflow:hidden;
-								}
-
-								.img-comp-img img {
-								display:block;
-								vertical-align:middle;
-								}
-
-								.img-comp-slider {
-								position: absolute;
-								z-index:9;
-								cursor: ew-resize;
-								/*set the appearance of the slider:*/
-								width: 40px;
-								height: 40px;
-								background-color: #2196F3;
-								opacity: 0.7;
-								border-radius: 50%;
-								}
-								</style>
-								<script>
-								function initComparisons() {
-								var x, i;
-								/*find all elements with an "overlay" class:*/
-								x = document.getElementsByClassName("img-comp-overlay");
-								for (i = 0; i < x.length; i++) {
-									/*once for each "overlay" element:
-									pass the "overlay" element as a parameter when executing the compareImages function:*/
-									compareImages(x[i]);
-								}
-								function compareImages(img) {
-									var slider, img, clicked = 0, w, h;
-									/*get the width and height of the img element*/
-									w = img.offsetWidth;
-									h = img.offsetHeight;
-									/*set the width of the img element to 50%:*/
-									img.style.width = (w / 2) + "px";
-									/*create slider:*/
-									slider = document.createElement("DIV");
-									slider.setAttribute("class", "img-comp-slider");
-									/*insert slider*/
-									img.parentElement.insertBefore(slider, img);
-									/*position the slider in the middle:*/
-									slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
-									slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
-									/*execute a function when the mouse button is pressed:*/
-									slider.addEventListener("mousedown", slideReady);
-									/*and another function when the mouse button is released:*/
-									window.addEventListener("mouseup", slideFinish);
-									/*or touched (for touch screens:*/
-									slider.addEventListener("touchstart", slideReady);
-									/*and released (for touch screens:*/
-									window.addEventListener("touchend", slideFinish);
-									function slideReady(e) {
-									/*prevent any other actions that may occur when moving over the image:*/
-									e.preventDefault();
-									/*the slider is now clicked and ready to move:*/
-									clicked = 1;
-									/*execute a function when the slider is moved:*/
-									window.addEventListener("mousemove", slideMove);
-									window.addEventListener("touchmove", slideMove);
-									}
-									function slideFinish() {
-									/*the slider is no longer clicked:*/
-									clicked = 0;
-									}
-									function slideMove(e) {
-									var pos;
-									/*if the slider is no longer clicked, exit this function:*/
-									if (clicked == 0) return false;
-									/*get the cursor's x position:*/
-									pos = getCursorPos(e)
-									/*prevent the slider from being positioned outside the image:*/
-									if (pos < 0) pos = 0;
-									if (pos > w) pos = w;
-									/*execute a function that will resize the overlay image according to the cursor:*/
-									slide(pos);
-									}
-									function getCursorPos(e) {
-									var a, x = 0;
-									e = e || window.event;
-									/*get the x positions of the image:*/
-									a = img.getBoundingClientRect();
-									/*calculate the cursor's x coordinate, relative to the image:*/
-									x = e.pageX - a.left;
-									/*consider any page scrolling:*/
-									x = x - window.pageXOffset;
-									return x;
-									}
-									function slide(x) {
-									/*resize the image:*/
-									img.style.width = x + "px";
-									/*position the slider:*/
-									slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
-									}
-								}
-								}
-								</script>
-								</head>
-								<body>
-
-								<h1>Louisiana Does Not Look Like You May Think...</h1>
-
-								<p> Southeast Louisiana is often depicted as a solid landmass on maps. This is somewhat unrealistic though - the following maps compare what Louisiana is depicted as vs. what maps would look like if they showed only solid land. The light blue indicates swamps, marshes, and wetlands. Click and slide the blue slider to compare two maps:</p>
-								
-								<div class="img-comp-container">
-								<div class="img-comp-img">
-									<img src="images/Louisiana Map Depiction.jpg" width="900" height="600">
-								</div>
-								<div class="img-comp-img img-comp-overlay">
-									<img src="images/Louisiana Solid Land Depiction.jpg" width="900" height="600">
-								</div>
-								</div>
-
-								<script>
-								/*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
-								initComparisons();
-								</script>
-
-								</body>
-								</html>
 							
-
-
-							<!--Backround Info Text-->
+							
 							</header>
-							<p style="text-indent: 40px">The Louisiana coast is eroding at an alarmingly fast rate, causing numerous consequences for the entire state. The loss of land destroys entire ecosystems that support fishing and migratory species are being destroyed, as well as leaves inland regions of Louisiana vulnerable to the damaging effects of storm surges such as flooding. With the addition of levees and degradation by oil companies through Louisiana’s waterways, the natural sediment that would once replenish barrier islands, marshlands, and swamps no longer cycle back to restore the land that washes away earlier in the year.</p>
-							<p style="text-indent: 40px">Vegetation and trees help to minimize the impact of the tides on marshes and coastal land. Specifically, trees help protect the coast in multiple ways: they absorb water, act as shields for the barrage of the tide, and eventually decompose into sediment that replaces lost land. Unfortunately with the loss of land, saltwater flows further inland killing off non-salt water plants in its path. This further narrows down the types of trees and vegetation that can be planted in an effort to restore land lost to erosion. </p>
-							<p style="text-indent: 40px">Choosing a species of tree for our planting algorithm was difficult because it had to possess a strong enough root system to help prevent erosion as well as be able to survive in Louisiana wetland or coastal conditions. At first, the Black Mangrove seemed like an ideal candidate because it can survive in water with a high salinity content, but the winter climate in Louisiana is too cold for it to survive. We came up with two different approaches: old Christmas trees for coastal areas with high salinity content, and bald cypress trees for wetland areas with a low salinity content. Old Christmas trees can be used to build wave-dampening fences or barriers that help reduce coastal erosion, and our algorithm can determine the optimal placement for these trees. Bald cypresses have a strong, lateral root system that helps prevent sediment from being washed away, grow well in the Louisiana climate in low salinity water, and can live with their root system partially submerged in water, making them a great candidate to be planted in wetland areas. </p>
-							<p style="text-indent: 40px">The current method for using Christmas trees to help prevent coastal erosion is to make large barriers or fences in Bayous, specifically in places where freshwater containing sediment and tidal ocean water meet. For cypress tree planting, which typically occurs in freshwater wetlands (salinity ppm under 10), the present procedure is to plant trees 14 feet apart and slightly stagger them by a foot or two so they are not in an exact line. </p>
-							</section>
 
-
-					</div>
-
-
-					<div id="main">
-
-						<!-- Post -->
-							<section class="post">
-								<header class="major">
-									<span class="date">A Bit About Us</span>
-									<p>A HUGE thank you to our project advisor: Dr. Aaron Maus, Professor of Practice in Computer Science at Tulane University</p> 
-										
-									<p>
-										Daniel Ellsworth: Math and Computer Science Major <br>
-										Dominique Perriseau: Neuroscience and Computer Science Major <br>
-										Mark Lisi: Math and Computer Science Major <br>
-										Molly Lyons: Cell & Molecular Biology and Computer Science Major <br>
-									</p>
-
-								
-								</header>
+							<header>
+								<span class="date">Tree Optimization Algorithm</span> 
+								<iframe width = "100%" height = 1000 src="animation_erosion_model.html"></iframe>
+								<br>
+								<br>
 							
+							</header>
+
+							<header>
+							<span class="date">Applying the Algorithm</span> 
+							<iframe width = "100%" height = 1000 src="updated_shapefile_algo.html"></iframe>
 
 							</header>
-							<p style="text-indent: 40px">We are four computer science majors in our senior year at Tulane University. This is our senior capstone project, which began in September of 2020. We all have a desire to help to do our best to preserve the beautiful Louisiana coastline, which we have all been able to enjoy the past four years while residing in New Orleans, LA. None of us have a particularly strong background in environmental studies, so our group has been researching and building this algorithm with the hope that it will make a lasting impact on the way Louisiana protects itself from erosion in the immediate future. Furthermore, our developed algorithm can be applied to generally all areas facing coastline erosion trouble, as it adapts to the environment it is being applied to. We have really enjoyed developing not only our algorithm but this website and learning more about Louisiana's coastline for the past academic year.</p>
-							
+						</article>
 
-							</section>
-
-						
-					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-						
-						<section class="split contact">
-							
-							<section>
-								<h3>Github Repository</h3>
-								<ul class="icons alt">
-									<li><a href="https://github.com/LouisianaCoastalRestoration/LouisianaCoastalRestoration.github.io" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+					<!-- Posts -->
+					<!--
+						<section class="posts">
+							<article>
+								<header>
+									<span class="date">April 24, 2017</span>
+									<h2><a href="#">Sed magna<br />
+									ipsum faucibus</a></h2>
+								</header>
+								<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
+								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+								<ul class="actions special">
+									<li><a href="#" class="button">Full Story</a></li>
 								</ul>
-							</section>
+							</article>
+							<article>
+								<header>
+									<span class="date">April 22, 2017</span>
+									<h2><a href="#">Primis eget<br />
+									imperdiet lorem</a></h2>
+								</header>
+								<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
+								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+								<ul class="actions special">
+									<li><a href="#" class="button">Full Story</a></li>
+								</ul>
+							</article>
+							<article>
+								<header>
+									<span class="date">April 18, 2017</span>
+									<h2><a href="#">Ante mattis<br />
+									interdum dolor</a></h2>
+								</header>
+								<a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
+								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+								<ul class="actions special">
+									<li><a href="#" class="button">Full Story</a></li>
+								</ul>
+							</article>
+							<article>
+								<header>
+									<span class="date">April 14, 2017</span>
+									<h2><a href="#">Tempus sed<br />
+									nulla imperdiet</a></h2>
+								</header>
+								<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
+								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+								<ul class="actions special">
+									<li><a href="#" class="button">Full Story</a></li>
+								</ul>
+							</article>
+							<article>
+								<header>
+									<span class="date">April 11, 2017</span>
+									<h2><a href="#">Odio magna<br />
+									sed consectetur</a></h2>
+								</header>
+								<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
+								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+								<ul class="actions special">
+									<li><a href="#" class="button">Full Story</a></li>
+								</ul>
+							</article>
+							<article>
+								<header>
+									<span class="date">April 7, 2017</span>
+									<h2><a href="#">Augue lorem<br />
+									primis vestibulum</a></h2>
+								</header>
+								<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
+								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+								<ul class="actions special">
+									<li><a href="#" class="button">Full Story</a></li>
+								</ul>
+							</article>
 						</section>
-					</footer>
+						
+
+					END OF BLOG POSTS-->
+
+					<!-- Footer -->
+						<footer>
+							<div class="pagination">
+								<!--<a href="#" class="previous">Prev</a>-->
+								<a href="index.html" class="page active">Our Project</a>
+								<a href="generic.html" class="page">Our Mission</a>
+								<a href="elements.html" class="page">References</a>
+							</div>
+						</footer>
+
+				</div>
+				
 
 				<!-- Copyright -->
 					<div id="copyright">
